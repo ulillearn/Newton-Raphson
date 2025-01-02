@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metode Newton-Raphson</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 800px;
+        padding: 20px;
+        max-width: 100%;
+      }
+
+      header {
+        background-color: #6c757d;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .content {
+        padding: 20px;
+        line-height: 1.1;
+        color: #495057;
+        text-align: justify;
+      }
+
+      .content h2 {
+        font-size: 20px;
+        color: #343a40;
+        margin-top: 20px;
+      }
+
+      .content ul {
+        padding-left: 20px;
+      }
+
+      .content li {
+        margin-bottom: 10px;
+      }
+
+      footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #6c757d;
+        border-top: 1px solid #e9ecef;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        position: relative;
+      }
+
+      .back-button {
+        position: absolute;
+        bottom: 40px;
+        right: 23px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .back-button img {
+        width: 40px;
+        height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>Metode Newton-Raphson</header>
+      <main class="content">
+        <p>
+          Metode Newton-Raphson adalah salah satu teknik numerik untuk mencari
+          solusi persamaan non-linier <i>f(x) = 0</i>. Metode ini menggunakan
+          turunan pertama dari fungsi untuk memperkirakan akar persamaan dengan
+          iterasi.
+        </p>
+        <h2>Langkah-Langkah Metode Newton-Raphson:</h2>
+        <ol>
+          <li>
+            Pilih nilai awal <i>x<sub>0</sub></i> yang dekat dengan akar yang
+            diinginkan.
+          </li>
+          <li>
+            Gunakan rumus iterasi berikut untuk memperbarui nilai perkiraan:
+            <div style="text-align: center; margin: 10px 0">
+              <i
+                >x<sub>n+1</sub> = x<sub>n</sub> - f(x<sub>n</sub>) /
+                f'(x<sub>n</sub>)</i
+              >
+            </div>
+            di mana <i>f'(x<sub>n</sub>)</i> adalah turunan pertama dari
+            <i>f(x)</i> pada <i>x<sub>n</sub></i
+            >.
+          </li>
+          <li>
+            Ulangi langkah iterasi sampai nilai <i>x<sub>n+1</sub></i> cukup
+            mendekati <i>x<sub>n</sub></i> atau sampai
+            <i>f(x<sub>n+1</sub>)</i> cukup mendekati nol.
+          </li>
+        </ol>
+        <h2>Keuntungan dan Kelemahan:</h2>
+        <p>
+          <b>Keuntungan:</b> Konvergensi yang cepat jika tebakan awal mendekati
+          akar sebenarnya.
+        </p>
+        <p><b>Kelemahan:</b></p>
+        <ul>
+          <li>
+            Memerlukan turunan fungsi yang kadang sulit atau tidak mungkin
+            dihitung.
+          </li>
+          <li>
+            Tidak selalu konvergen jika tebakan awal jauh dari akar sebenarnya.
+          </li>
+        </ul>
+        <h2>Panduan Penggunaan Website:</h2>
+        <ul>
+          <li>
+            <b>Cara Menuliskan Pangkat:</b> Gunakan operator <code>^</code>,
+            misalnya <code>x^2</code> untuk x pangkat dua.
+          </li>
+          <li>
+            <b>Cara Menulis Perkalian:</b> Gunakan operator <code>*</code>,
+            misalnya <code>2*x</code>.
+          </li>
+          <li>
+            <b>Cara Menuliskan Pembagian:</b> Gunakan operator <code>/</code>,
+            misalnya <code>x/2</code>.
+          </li>
+          <li>
+            <b>Contoh Input:</b>
+            <ul>
+              <li><b>f(x):</b> <code>x^2 - 4</code></li>
+              <li><b>f'(x):</b> <code>2*x</code></li>
+              <li><b>Tebakan Awal:</b> <code>2</code></li>
+              <li><b>Toleransi Error:</b> <code>0.0001</code></li>
+              <li><b>Maksimum Iterasi:</b> <code>100</code></li>
+            </ul>
+          </li>
+        </ul>
+        <h2>Informasi Tambahan:</h2>
+        <ul>
+          <li>
+            Pastikan fungsi dan turunannya konsisten untuk menghindari error.
+          </li>
+          <li>
+            Gunakan nilai tebakan awal yang dekat dengan akar untuk hasil yang
+            lebih cepat.
+          </li>
+          <li>
+            Perhatikan toleransi error dan iterasi maksimum untuk mengontrol
+            proses iterasi.
+          </li>
+        </ul>
+        <footer>
+          <p><b>Pembuat:</b></p>
+          <ul>
+            <li>Ulil Noor Absor - 143223021</li>
+            <li>Angga Kurniawan - 143223020</li>
+            <li>M. Rahmad Ramadani - 143223023</li>
+          </ul>
+          <button class="back-button" onclick="goToMainPage()">
+            <img src="backIcon.png" alt="Back" />
+          </button>
+        </footer>
+      </main>
+    </div>
+    <script>
+      function goToMainPage() {
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

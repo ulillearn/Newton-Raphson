@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Newton-Raphson Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 800px;
+        padding: 20px;
+        max-width: 90%;
+      }
+
+      header {
+        background-color: #6c757d;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .form-container {
+        display: flex;
+        gap: 45px;
+        padding: 20px;
+      }
+
+      .form-left,
+      .form-right {
+        flex: 1;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #495057;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        background-color: #e9ecef;
+        margin-bottom: 10px;
+      }
+
+      .buttons {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+      }
+
+      .buttons button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .btn-calculate {
+        background-color: #28a745;
+        color: white;
+      }
+
+      .btn-calculate:hover {
+        background-color: #218838;
+      }
+
+      .btn-clear {
+        background-color: #dc3545;
+        color: white;
+      }
+
+      .btn-clear:hover {
+        background-color: #c82333;
+      }
+
+      .textarea {
+        flex: 1;
+      }
+
+      .textarea-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #495057;
+      }
+
+      .textarea textarea {
+        width: 100%;
+        height: 188px;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        background-color: #e9ecef;
+        margin-bottom: 21px;
+        resize: none;
+      }
+
+      .textarea input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        background-color: #e9ecef;
+        margin-bottom: 10px;
+      }
+
+      .info-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
+      .info-icon img {
+        width: 40px;
+        height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>Newton-Raphson Calculator</header>
+      <main class="form-container">
+        <section class="form-left">
+          <div class="form-group">
+            <label for="function">Fungsi f(x)</label>
+            <input
+              type="text"
+              id="function"
+              placeholder="Masukkan fungsi f(x)"
+            />
+          </div>
+          <div class="form-group">
+            <label for="derivative">Turunan f'(x)</label>
+            <input
+              type="text"
+              id="derivative"
+              placeholder="Masukkan turunan f'(x)"
+            />
+          </div>
+          <div class="form-group">
+            <label for="initial">Nilai awal</label>
+            <input type="text" id="initial" placeholder="Masukkan nilai awal" />
+          </div>
+          <div class="form-group">
+            <label for="tolerance">Toleransi error</label>
+            <input
+              type="text"
+              id="tolerance"
+              placeholder="Masukkan toleransi error"
+            />
+          </div>
+          <div class="form-group">
+            <label for="max-iterations">Maksimum Iterasi</label>
+            <input
+              type="text"
+              id="max-iterations"
+              placeholder="Masukkan maksimum iterasi"
+            />
+          </div>
+          <div class="buttons">
+            <button class="btn-calculate" onclick="calculate()">Hitung</button>
+            <button class="btn-clear" onclick="clearFields()">Clear</button>
+          </div>
+        </section>
+        <section class="form-right">
+          <div class="textarea">
+            <div class="textarea-title">Hasil Iterasi</div>
+            <textarea id="iterations" readonly></textarea>
+            <div class="textarea-title">Akar yang Ditemukan</div>
+            <input type="text" id="result" readonly />
+          </div>
+        </section>
+      </main>
+    </div>
+    <button class="info-icon" onclick="goToInfoPage()">
+      <img src="infoIcon.png" alt="Info" />
+    </button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.3.0/math.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
