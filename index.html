@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Newton-Raphson Calculator</title>
+    <title>Kalkulator Newton-Raphson</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -34,29 +34,29 @@
         border-radius: 10px 10px 0 0;
       }
 
-      .form-container {
+      .container-form {
         display: flex;
         gap: 45px;
         padding: 20px;
       }
 
-      .form-left,
-      .form-right {
+      .form-kiri,
+      .form-kanan {
         flex: 1;
       }
 
-      .form-group {
+      .grup-form {
         margin-bottom: 15px;
       }
 
-      .form-group label {
+      .grup-form label {
         display: block;
         font-weight: bold;
         margin-bottom: 5px;
         color: #495057;
       }
 
-      .form-group input {
+      .grup-form input {
         width: 100%;
         padding: 10px;
         border: 1px solid #ced4da;
@@ -65,13 +65,13 @@
         margin-bottom: 10px;
       }
 
-      .buttons {
+      .button {
         display: flex;
         gap: 30px;
         margin-top: 20px;
       }
 
-      .buttons button {
+      .button button {
         flex: 1;
         padding: 10px;
         border: none;
@@ -81,21 +81,21 @@
         transition: background-color 0.3s ease;
       }
 
-      .btn-calculate {
+      .btn-hitung {
         background-color: #28a745;
         color: white;
       }
 
-      .btn-calculate:hover {
+      .btn-hitung:hover {
         background-color: #218838;
       }
 
-      .btn-clear {
+      .btn-hapus {
         background-color: #dc3545;
         color: white;
       }
 
-      .btn-clear:hover {
+      .btn-hapus:hover {
         background-color: #c82333;
       }
 
@@ -103,7 +103,7 @@
         flex: 1;
       }
 
-      .textarea-title {
+      .judul-textarea {
         font-weight: bold;
         margin-bottom: 5px;
         color: #495057;
@@ -129,7 +129,7 @@
         margin-bottom: 10px;
       }
 
-      .info-icon {
+      .icon-info {
         position: fixed;
         bottom: 20px;
         right: 20px;
@@ -139,7 +139,7 @@
         z-index: 1000;
       }
 
-      .info-icon img {
+      .icon-info img {
         width: 40px;
         height: 40px;
       }
@@ -147,61 +147,63 @@
   </head>
   <body>
     <div class="container">
-      <header>Newton-Raphson Calculator</header>
-      <main class="form-container">
-        <section class="form-left">
-          <div class="form-group">
-            <label for="function">Fungsi f(x)</label>
-            <input
-              type="text"
-              id="function"
-              placeholder="Masukkan fungsi f(x)"
-            />
+      <header>Kalkulator Newton-Raphson</header>
+      <main class="container-form">
+        <section class="form-kiri">
+          <div class="grup-form">
+            <label for="fungsi">Fungsi f(x)</label>
+            <input type="text" id="fungsi" placeholder="Masukkan fungsi f(x)" />
           </div>
-          <div class="form-group">
-            <label for="derivative">Turunan f'(x)</label>
+          <div class="grup-form">
+            <label for="turunan">Turunan f'(x)</label>
             <input
               type="text"
-              id="derivative"
+              id="turunan"
               placeholder="Masukkan turunan f'(x)"
             />
           </div>
-          <div class="form-group">
-            <label for="initial">Nilai awal</label>
-            <input type="text" id="initial" placeholder="Masukkan nilai awal" />
-          </div>
-          <div class="form-group">
-            <label for="tolerance">Toleransi error</label>
+          <div class="grup-form">
+            <label for="nilai-awal">Nilai awal</label>
             <input
               type="text"
-              id="tolerance"
+              id="nilai-awal"
+              placeholder="Masukkan nilai awal"
+            />
+          </div>
+          <div class="grup-form">
+            <label for="toleransi">Toleransi error</label>
+            <input
+              type="text"
+              id="toleransi"
               placeholder="Masukkan toleransi error"
             />
           </div>
-          <div class="form-group">
-            <label for="max-iterations">Maksimum Iterasi</label>
+          <div class="grup-form">
+            <label for="maks-iterasi">Maksimum Iterasi</label>
             <input
               type="text"
-              id="max-iterations"
+              id="maks-iterasi"
               placeholder="Masukkan maksimum iterasi"
             />
           </div>
-          <div class="buttons">
-            <button class="btn-calculate" onclick="calculate()">Hitung</button>
-            <button class="btn-clear" onclick="clearFields()">Clear</button>
+          <div class="button">
+            <button class="btn-hitung" onclick="hitungNewtonRaphson()">
+              Hitung
+            </button>
+            <button class="btn-hapus" onclick="hapusSemuaInput()">Hapus</button>
           </div>
         </section>
-        <section class="form-right">
+        <section class="form-kanan">
           <div class="textarea">
-            <div class="textarea-title">Hasil Iterasi</div>
-            <textarea id="iterations" readonly></textarea>
-            <div class="textarea-title">Akar yang Ditemukan</div>
-            <input type="text" id="result" readonly />
+            <div class="judul-textarea">Hasil Iterasi</div>
+            <textarea id="iterasi" readonly></textarea>
+            <div class="judul-textarea">Akar yang Ditemukan</div>
+            <input type="text" id="hasil" readonly />
           </div>
         </section>
       </main>
     </div>
-    <button class="info-icon" onclick="goToInfoPage()">
+    <button class="icon-info" onclick="keHalamanInfo()">
       <img src="infoIcon.png" alt="Info" />
     </button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.3.0/math.min.js"></script>

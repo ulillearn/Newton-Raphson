@@ -1,92 +1,92 @@
-// Fungsi untuk membersihkan semua input
-function clearFields() {
-  document.getElementById("function").value = "";
-  document.getElementById("derivative").value = "";
-  document.getElementById("initial").value = "";
-  document.getElementById("tolerance").value = "";
-  document.getElementById("max-iterations").value = "";
-  document.getElementById("iterations").value = "";
-  document.getElementById("result").value = "";
+// Fungsi untuk mengosongkan semua input
+function hapusSemuaInput() {
+  document.getElementById("fungsi").value = "";
+  document.getElementById("turunan").value = "";
+  document.getElementById("nilai-awal").value = "";
+  document.getElementById("toleransi").value = "";
+  document.getElementById("maks-iterasi").value = "";
+  document.getElementById("iterasi").value = "";
+  document.getElementById("hasil").value = "";
 }
 
 // Fungsi utama untuk menghitung akar menggunakan metode Newton-Raphson
-function calculate() {
-  const funcInput = document.getElementById("function").value;
-  const derivativeInput = document.getElementById("derivative").value;
-  const initialInput = document.getElementById("initial").value;
-  const toleranceInput = document.getElementById("tolerance").value;
-  const maxIterationsInput = document.getElementById("max-iterations").value;
+function hitungNewtonRaphson() {
+  const fungsiInput = document.getElementById("fungsi").value;
+  const turunanInput = document.getElementById("turunan").value;
+  const nilaiAwalInput = document.getElementById("nilai-awal").value;
+  const toleransiInput = document.getElementById("toleransi").value;
+  const maksIterasiInput = document.getElementById("maks-iterasi").value;
+  const areaIterasi = document.getElementById("iterasi");
+  const hasil = document.getElementById("hasil");
 
-  const iterationsArea = document.getElementById("iterations");
-  const result = document.getElementById("result");
-
-  // Validasi input
+  // Validasi apakah semua input telah diisi
   if (
-    !funcInput ||
-    !derivativeInput ||
-    !initialInput ||
-    !toleranceInput ||
-    !maxIterationsInput
+    !fungsiInput ||
+    !turunanInput ||
+    !nilaiAwalInput ||
+    !toleransiInput ||
+    !maksIterasiInput
   ) {
     alert("Harap isi semua kolom input.");
     return;
   }
 
   try {
-    // Menggunakan math.js untuk kompilasi fungsi dan turunan
-    const f = math.compile(funcInput);
-    const fPrime = math.compile(derivativeInput);
-    let x = parseFloat(initialInput); // Nilai awal
-    const tolerance = parseFloat(toleranceInput); // Toleransi error
-    const maxIterations = parseInt(maxIterationsInput); // Iterasi maksimum
+    // Kompilasi fungsi f(x) dan turunan f'(x) menggunakan math.js
+    const f = math.compile(fungsiInput); //mengubah string fungsiInput menjadi fungsi matematika
+    const fTurunan = math.compile(turunanInput);
 
-    if (isNaN(x) || isNaN(tolerance) || isNaN(maxIterations)) {
-      alert(
-        "Input awal, toleransi, dan jumlah iterasi maksimum harus berupa angka."
-      );
+    let x = parseFloat(nilaiAwalInput); // Konversi nilai awal menjadi angka
+    const toleransi = parseFloat(toleransiInput); // Konversi toleransi menjadi angka
+    const maksIterasi = parseInt(maksIterasiInput); // Konversi iterasi maksimum menjadi angka
+
+    // untuk mengecek apakah Nan(not a number)
+    if (isNaN(x) || isNaN(toleransi) || isNaN(maksIterasi)) {
+      alert("Nilai awal, toleransi, dan iterasi maksimum harus berupa angka."); // Validasi angka
       return;
     }
 
-    let iterCount = 0;
-    let error = 1;
-    let iterations = "";
+    let jumlahIterasi = 0; // untuk menghitung jumlah iterasi yang dilakukan
+    let error = 1; // untuk mengukur seberapa jauh nilai perkiraan saat ini dari nilai akar yang sebenarnya.
+    let logIterasi = ""; // String untuk mencatat hasil setiap iterasi
 
-    // Proses iterasi dengan metode Newton-Raphson
-    while (error > tolerance && iterCount < maxIterations) {
-      const fx = f.evaluate({ x });
-      const fpx = fPrime.evaluate({ x });
+    // Iterasi menggunakan metode Newton-Raphson
+    while (error > toleransi && jumlahIterasi < maksIterasi) {
+      const fx = f.evaluate({ x }); // Evaluasi nilai f(x) pada x
+      const fpx = fTurunan.evaluate({ x }); // Evaluasi nilai f'(x) pada x
 
       if (fpx === 0) {
-        alert("Turunan f(x) sama dengan 0, metode Newton-Raphson gagal.");
+        alert("Turunan f(x) sama dengan 0, metode Newton-Raphson gagal."); // Gagal jika turunan 0
         return;
       }
 
-      let xNew = x - fx / fpx; // Rumus Newton-Raphson
-      error = Math.abs(xNew - x); // Perhitungan error
-      x = xNew;
+      let xBaru = x - fx / fpx; // Rumus Newton-Raphson: x - f(x) / f'(x)
+      error = Math.abs(xBaru - x); // Hitung error (selisih antara x baru dan x lama)
+      x = xBaru; // Perbarui nilai x
 
-      iterations += `Iterasi ${iterCount + 1}: x = ${x.toFixed(
+      // Catat hasil iterasi
+      logIterasi += `Iterasi ${jumlahIterasi + 1}: x = ${x.toFixed(
         6
       )}, Error = ${error.toFixed(6)}\n`;
-      iterCount++;
+      jumlahIterasi++;
     }
 
-    // Menampilkan hasil dan iterasi
-    if (error <= tolerance) {
-      iterations += `Metode Newton-Raphson konvergen setelah ${iterCount} iterasi.\n`;
-      result.value = x.toFixed(6);
+    // Tampilkan hasil akhir
+    if (error <= toleransi) {
+      logIterasi += `Metode Newton-Raphson konvergen setelah ${jumlahIterasi} iterasi.\n`;
+      hasil.value = x.toFixed(6); // Simpan hasil akhir
     } else {
-      iterations += `Metode Newton-Raphson tidak konvergen dalam ${maxIterations} iterasi.\n`;
-      result.value = "Tidak ditemukan";
+      logIterasi += `Metode Newton-Raphson tidak konvergen dalam ${maksIterasi} iterasi.\n`;
+      hasil.value = "Tidak ditemukan"; // Jika tidak konvergen
     }
 
-    iterationsArea.value = iterations;
+    areaIterasi.value = logIterasi; // Tampilkan log iterasi
   } catch (err) {
-    alert(`Terjadi kesalahan saat menghitung: ${err.message}`);
+    alert(`Terjadi kesalahan saat menghitung: ${err.message}`); // Tangani kesalahan
   }
 }
 
-// Fungsi untuk menuju halaman info
-function goToInfoPage() {
+// Fungsi untuk menuju halaman informasi
+function keHalamanInfo() {
   window.location.href = "info.html";
 }
