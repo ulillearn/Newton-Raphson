@@ -79,7 +79,7 @@ function hitungNewtonRaphson() {
       hasil.value = akarTerakhir.toFixed(6); // Simpan hasil akhir
     } else {
       logIterasi += `Metode Newton-Raphson tidak konvergen dalam ${maksIterasi} iterasi.\n`;
-      logIterasi += `/n Akar terakhir yang ditemukan pada iterasi ke-${jumlahIterasi}: ${akarTerakhir.toFixed(
+      logIterasi += `\nAkar terakhir yang ditemukan pada iterasi ke-${jumlahIterasi}: ${akarTerakhir.toFixed(
         6
       )}\n`;
       hasil.value = akarTerakhir.toFixed(6); // Tetap tampilkan akar terakhir
