@@ -49,6 +49,7 @@ function hitungNewtonRaphson() {
     let jumlahIterasi = 0; // untuk menghitung jumlah iterasi yang dilakukan
     let error = 1; // untuk mengukur seberapa jauh nilai perkiraan saat ini dari nilai akar yang sebenarnya.
     let logIterasi = ""; // String untuk mencatat hasil setiap iterasi
+    let akarTerakhir = x; // Menyimpan nilai terakhir x yang dihitung
 
     // Iterasi menggunakan metode Newton-Raphson
     while (error > toleransi && jumlahIterasi < maksIterasi) {
@@ -62,6 +63,7 @@ function hitungNewtonRaphson() {
 
       let xBaru = x - fx / fpx; // Rumus Newton-Raphson: x - f(x) / f'(x)
       error = Math.abs(xBaru - x); // Hitung error (selisih antara x baru dan x lama)
+      akarTerakhir = xBaru; // Perbarui akar terakhir yang ditemukan
       x = xBaru; // Perbarui nilai x
 
       // Catat hasil iterasi
@@ -74,10 +76,13 @@ function hitungNewtonRaphson() {
     // Tampilkan hasil akhir
     if (error <= toleransi) {
       logIterasi += `Metode Newton-Raphson konvergen setelah ${jumlahIterasi} iterasi.\n`;
-      hasil.value = x.toFixed(6); // Simpan hasil akhir
+      hasil.value = akarTerakhir.toFixed(6); // Simpan hasil akhir
     } else {
       logIterasi += `Metode Newton-Raphson tidak konvergen dalam ${maksIterasi} iterasi.\n`;
-      hasil.value = "Tidak ditemukan"; // Jika tidak konvergen
+      logIterasi += `Akar terakhir yang ditemukan pada iterasi ke-${jumlahIterasi}: ${akarTerakhir.toFixed(
+        6
+      )}\n`;
+      hasil.value = akarTerakhir.toFixed(6); // Tetap tampilkan akar terakhir
     }
 
     areaIterasi.value = logIterasi; // Tampilkan log iterasi
